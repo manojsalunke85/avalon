@@ -40,7 +40,7 @@ max_work_order_count = 10
 # Service Provider ID (SPID) is a 32-digit hex string tied to the
 # enclave implementation. Replace dummy SPID with value obtained after
 # subscription to run TCS in Intel SGX HW mode.
-spid = "DEADBEEF00000000DEADBEEF00000000"
+spid = "6A7BF0A7BFBB397D25F054E445A7EBE5"
 
 num_of_enclaves = "1"
 
@@ -49,12 +49,12 @@ ias_url = "https://api.trustedservices.intel.com/sgx/dev"
 
 # Proxy for https. Leave commented out for direct Internet connections or
 # uncomment and change to your corporate proxy.
-#https_proxy = "http://your-proxy:your-port/"
+https_proxy = "http://proxy-chain.intel.com:912"
 
 # IAS API key is a 32-digit hex string subscription key used for authentication
 # of requests submitted to the IAS server. Obtain the key by subscribing in
 # the portal https://api.portal.trustedservices.intel.com/
-ias_api_key = "112233445566778899aabbccddeeff00"
+ias_api_key = "dd573da79e124768a90dbccc3faa4a03"
 
 # TEE enclave library to use.
 enclave_library = "libtcf-enclave.signed.so"
