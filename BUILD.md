@@ -54,7 +54,7 @@ Follow the instructions below to execute a Docker-based build and execution.
 4. Open a Docker container shell using following command
    `sudo docker exec -it tcf bash`
 5. To execute test cases refer to [Testing](#testing) section below
-6. To exit the TCF program, press `Ctrl-c`
+6. To exit the Avalon program, press `Ctrl-c`
 
 
 # <a name="standalonebuild"></a>Standalone Build
@@ -70,13 +70,25 @@ The steps below will set up a Python virtual environment to run Avalon.
 1. Make sure environment variables are set as described in the
    [PREREQUISITES document](PREREQUISITES.md)
 
-2. Download the Avalon source repository if you have not already done this:
+2. Choose whether you want the stable version (recommended) or the most recent
+   version
+
+   - To use the current stable branch (recommended), run this command:
+     ```bash
+     git clone https://github.com/hyperledger/avalon --branch v0.5-pre-release.1
+     ```
+
+   - Or, to use the latest branch, run this command:
+     ```bash
+     git clone https://github.com/hyperledger/avalon 
+     ```
+
+3. Change to the Avalon source directory
    ```bash
-   git clone https://github.com/hyperledger/avalon 
    cd avalon
    ```
 
-3. Set `TCF_HOME` to the top level directory of your
+4. Set `TCF_HOME` to the top level directory of your
    `avalon` source repository.
    You will need these environment variables set in every shell session
    where you interact with Avalon.
@@ -87,7 +99,7 @@ The steps below will set up a Python virtual environment to run Avalon.
    echo "export TCF_HOME=$TCF_HOME" >> ~/.bashrc
    ```
 
-4. If you are using Intel SGX hardware, check that `SGX_MODE=HW` before
+5. If you are using Intel SGX hardware, check that `SGX_MODE=HW` before
    building the code.
    By default `SGX_MODE=SIM` indicating use the Intel SGX simulator.
    if you are not using Intel SGX hardware, go to the next step.
@@ -118,46 +130,56 @@ The steps below will set up a Python virtual environment to run Avalon.
    then leave this line commented out.
 
 
-5. Create a Python virtual environment, and build and install Avalon
-   components into it:
+6. Create a Python virtual environment:
+
    ```bash
    cd $TCF_HOME/tools/build
-   # Create virtual environment directory with name _dev
    python3 -m venv _dev
-   sudo make clean
-   make
    ```
 
-6. Build the Client SDK Python module:
-
-   ```bash
-   cd $TCF_HOME/client_sdk
-   python3 setup.py bdist_wheel
-   pip3 install dist/*.whl
-   ```
-
-7. Build the LMDB listener and shared key/value storage modules:
-
- 
-   ```bash
-   cd $TCF_HOME/examples/shared_kv_storage/db_store/packages
-   mkdir -p build
-   cd build
-   cmake ..
-   make
-   cd $TCF_HOME/examples/shared_kv_storage
-   make
-   make install
-   ```
-
-8. Activate the new Python virtual environment for the current shell session.
+7. Activate the new Python virtual environment for the current shell session.
    You will need to do this in each new shell session (in addition to
    exporting environment variables).
    ```bash
-   source $TCF_HOME/tools/build/_dev/bin/activate
+   source _dev/bin/activate
    ```
+
    If the virtual environment for the current shell session is activated,
    you will the see this prompt: `(_dev)`
+
+8. Install PIP3 packages into your Python virtual environment:
+
+   ```bash
+   pip3 install --upgrade setuptools json-rpc py-solc web3 colorlog twisted wheel
+   ```
+
+9. Build and install Avalon components:
+
+   ```bash
+   make clean
+   make
+   ```
+
+10. Build the Avalon SDK Python module:
+
+    ```bash
+    cd $TCF_HOME/sdk
+    python3 setup.py bdist_wheel
+    pip3 install dist/*.whl
+    ```
+
+11. Build the LMDB listener and shared key/value storage modules:
+ 
+    ```bash
+    cd $TCF_HOME/examples/shared_kv_storage/db_store/packages
+    mkdir -p build
+    cd build
+    cmake ..
+    make
+    cd $TCF_HOME/examples/shared_kv_storage
+    make
+    make install
+    ```
 
 # <a name="testing"></a>Testing
 
@@ -181,24 +203,32 @@ Follow these steps to run the `Demo.py` testcase:
    6. To run the Demo test case, open a new terminal, Terminal 2
    7. In Terminal 2, run `source $TCF_HOME/tools/build/_dev/bin/activate`.
       You should see the `(_dev)` prompt
+   8. In Terminal 2, cd to `$TCF_HOME/tests` and
+      type this command to run the `Demo.py` test:
+      ```bash
+      cd $TCF_HOME/tests
+      python3 Demo.py --input_dir ./json_requests/ \
+         --connect_uri "http://localhost:1947" work_orders/output.json
+      ```
 2. For Docker-based builds:
    1. Follow the steps above for
       ["Docker-based Build and Execution"](#dockerbuild)
    2. Terminal 1 is running `docker-compose` and Terminal 2 is running the
       "tcf" Docker container shell from the previous build steps
-3. In Terminal 2, run `cd $TCF_HOME/tests`
-4. In Terminal 2, use this command to run the `Demo.py` test:
-   ```bash
-   python3 Demo.py --input_dir ./json_requests/ \
-           --connect_uri "http://localhost:1947" work_orders/output.json
-   ```
-5. The response to the Avalon listener and Intel&reg; SGX enclave Manager can be
-   seen at Terminal 1
-6. The response to the test case request can be seen at Terminal 2
-7. If you wish to exit the Avalon program, press `y` and `Enter` at Terminal 1
+   3. In Terminal 2, cd to `$TCF_HOME/tests` and
+      type this command to run the `Demo.py` test:
+      ```bash
+      cd $TCF_HOME/tests
+      python3 Demo.py --input_dir ./json_requests/ \
+         --connect_uri "http://avalon-listener:1947" work_orders/output.json
+      ```
+3. The response to the Avalon listener and Intel&reg; SGX enclave Manager
+   can be seen at Terminal 1
+4. The response to the test case request can be seen at Terminal 2
+5. If you wish to exit the Avalon program, press `y` and `Enter` at Terminal 1
    for standalone builds.
    For Docker-based builds, press `Ctrl-c`
-8. For standalone mode, delete virtual environment
+6. For standalone mode, delete virtual environment
    ```bash
    rm -rf $TCF_HOME/tools/build/_dev/
    ```
@@ -211,6 +241,11 @@ See [examples/apps/heart_disease_eval](examples/apps/heart_disease_eval)
   `ModuleNotFoundError: No module named '...'`, you did not run
   `source _dev/bin/activate`
   or you did not successfully build Avalon
+
+- If you see the message `CMake Error: The current CMakeCache.txt
+  . . . is different than the directory . . . where CMakeCache.txt
+   was created.` then the CMakeCache.txt file is out-of-date.
+   Remove the file and rebuild.
 
 ## <a name="troubleshootingstandalone"></a>Troubleshooting: Standalone build
 - Verify your [environment variables](PREREQUISITES.md#environment)
