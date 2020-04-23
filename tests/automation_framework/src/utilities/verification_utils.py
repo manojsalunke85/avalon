@@ -249,4 +249,6 @@ def check_negative_test_responses(response, expected_res):
         if response["error"]["message"] == "Invalid workload id":
             return TestStep.SUCCESS.value
 
-
+    if expected_res == "Invalid data format for data hash of in data":
+        if response["error"]["message"] == "Invalid data format for data hash of in data":
+            return TestStep.SUCCESS.value
