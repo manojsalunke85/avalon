@@ -528,7 +528,7 @@ class TestClass():
         assert (
                 check_negative_test_responses(
                     result_response,
-                    "Invalid params Worker Encryption Key")
+                    "Empty or Invalid dataformat for workerEncryptionKey")
                 is ResultStatus.SUCCESS.value)
         logger.info('\t\t!!! Test completed !!!\n\n')
 
@@ -1890,7 +1890,7 @@ class TestClass():
         assert (
                 check_negative_test_responses(
                     result_response,
-                    "Invalid data format for requesterNonce")
+                    "Empty or Invalid data format for requesterNonce")
                 is ResultStatus.SUCCESS.value)
         logger.info('\t\t!!! Test completed !!!\n\n')
 
