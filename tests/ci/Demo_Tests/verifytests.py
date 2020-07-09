@@ -45,19 +45,19 @@ test_dict = {'QCID_18393': 'Hello', \
              'QCID_18406': 'JMeter is a performance test tool.', \
              'QCID_18394': '#@!$%@#&*()$%#', \
              'QCID_18411': 'Error with missing or incorrect input format', \
-             'QCID_18422': 'Invalid workload id', \
+             'QCID_18422': 'Workload cannot be processed by this worker', \
              'QCID_18439': 'Workload id is mandatory', \
              'QCID_18430': 'You have a 47% risk of heart disease', \
              'QCID_18429': 'Error with missing or incorrect input format', \
              'QCID_18428': 'Heart disease risk is',  \
-             'QCID_18437': 'Cannot encrypt the empty message', \
-             'QCID_20315': 'Cannot encrypt the empty message', \
+             'QCID_18437': 'Decryption result at client - RESULT: ', \
+             'QCID_20315': 'Heart disease risk is', \
              'QCID_20316': 'Worker Id not found in the database.', \
              'QCID_20317': 'Worker Id not found in the database.', \
              'QCID_18401': 'Temporary failure in name resolution', \
              'QCID_20318': 'RequesterSignatureEnabled1', 'QCID_20319': 'You have a 47% risk of heart disease', \
              'QCID_18436': 'Worker Id not found in the database', \
-             'QCID_20320': 'Invalid workload id'}
+             'QCID_20320': 'Workload cannot be processed by this worker'}
 for test_name, test_value in test_dict.items():
     file_contents = open(resultfile, "r")
     filedata = file_contents.readlines()
