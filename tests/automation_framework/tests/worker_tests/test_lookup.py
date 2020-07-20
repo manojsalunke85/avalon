@@ -43,15 +43,16 @@ class TestClass():
     @pytest.mark.positive
     def test_worker_lookup_success(self):
         test_id = '18271'
+        test_data = read_config(self.config_file, test_id)
 
         err_cd = self.test_obj.setup_and_build_request_lookup(
-            read_config(self.config_file, test_id))
+            test_data)
 
         response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
-            read_config(self.config_file, test_id))
+            test_data)
 
         logger.info("**********Received Response*********\n%s\n", response)
 
@@ -71,15 +72,16 @@ class TestClass():
     @pytest.mark.ethereum
     def test_worker_lookup_workerType_not_unsigned_int(self):
         test_id = '18275'
+        test_data = read_config(self.config_file, test_id)
 
         err_cd = self.test_obj.setup_and_build_request_lookup(
-            read_config(self.config_file, test_id))
+            test_data)
 
         response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
-            read_config(self.config_file, test_id))
+            test_data)
 
         logger.info("**********Received Response*********\n%s\n", response)
 
@@ -94,15 +96,16 @@ class TestClass():
     @pytest.mark.listener
     def test_worker_lookup_empty_params(self):
         test_id = '18277'
+        test_data = read_config(self.config_file, test_id)
 
         err_cd = self.test_obj.setup_and_build_request_lookup(
-            read_config(self.config_file, test_id))
+            test_data)
 
         response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
-            read_config(self.config_file, test_id))
+            test_data)
 
         logger.info("**********Received Response*********\n%s\n", response)
 
@@ -117,6 +120,7 @@ class TestClass():
     @pytest.mark.listener
     def test_worker_lookup_jsonrpc_different_version(self):
         test_id = '18280'
+
         request_file = os.path.join(
             env.worker_input_file,
             "worker_lookup_jsonrpc_different_version.json")
@@ -158,15 +162,16 @@ class TestClass():
     @pytest.mark.negative
     def test_worker_lookup_diff_unit_length(self):
         test_id = '20364'
+        test_data = read_config(self.config_file, test_id)
 
         err_cd = self.test_obj.setup_and_build_request_lookup(
-            read_config(self.config_file, test_id))
+            test_data)
 
         response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
-            read_config(self.config_file, test_id))
+            test_data)
 
         logger.info("**********Received Response*********\n%s\n", response)
 
@@ -181,6 +186,7 @@ class TestClass():
     @pytest.mark.negative
     def test_worker_lookup_method_field_change(self):
         test_id = '18278'
+
         request_file = os.path.join(
             env.worker_input_file,
             "worker_lookup_method_field_change.json")
@@ -203,6 +209,7 @@ class TestClass():
     @pytest.mark.negative
     def test_worker_lookup_twice_params(self):
         test_id = '18279'
+
         request_file = os.path.join(
             env.worker_input_file,
             "worker_lookup_twice_params.json")
@@ -225,6 +232,7 @@ class TestClass():
     @pytest.mark.negative
     def test_workerlookup_params_unknownparameter (self):
         test_id = '20592'
+
         request_file = os.path.join(
             env.worker_input_file,
             "workerlookup_params_unknownparameter.json")

@@ -43,15 +43,16 @@ class TestClass():
     @pytest.mark.positive
     def test_worker_retrieve_success(self):
         test_id = '18273'
+        test_data = read_config(self.config_file, test_id)
 
         err_cd = self.test_obj.setup_and_build_request_retrieve(
-            read_config(self.config_file, test_id))
+            test_data)
 
         submit_response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.wo_submit_output_json_file_name,
-            read_config(self.config_file, test_id))
+            test_data)
 
         assert (check_worker_retrieve_response(submit_response)
                 is ResultStatus.SUCCESS.value)
@@ -69,18 +70,20 @@ class TestClass():
     @pytest.mark.negative
     def test_worker_retrieve_empty_params(self):
         test_id = '18274'
+        test_data = read_config(self.config_file, test_id)
+
         request_file = os.path.join(
             env.worker_input_file,
             "worker_retrieve_empty_params.json")
 
         err_cd = self.test_obj.setup_and_build_request_retrieve(
-            read_config(self.config_file, test_id))
+            test_data)
 
         submit_response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.wo_submit_output_json_file_name,
-            read_config(self.config_file, test_id))
+            test_data)
 
         assert (
             check_negative_test_responses(
@@ -96,18 +99,20 @@ class TestClass():
     @pytest.mark.negative
     def test_workerretrieve_params_unknownparameter(self):
         test_id = '20591'
+        test_data = read_config(self.config_file, test_id)
+
         request_file = os.path.join(
             env.worker_input_file,
             "workerretrieve_params_unknownparameter.json")
 
         err_cd = self.test_obj.setup_and_build_request_retrieve(
-            read_config(self.config_file, test_id))
+            test_data)
 
         submit_response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.wo_submit_output_json_file_name,
-            read_config(self.config_file, test_id))
+            test_data)
 
         assert (
             check_negative_test_responses(
