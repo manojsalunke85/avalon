@@ -20,7 +20,7 @@ from src.utilities.verification_utils \
     import check_worker_lookup_response, check_worker_retrieve_response, \
     validate_response_code
 from src.libs.avalon_test_wrapper \
-    import read_json, submit_request
+    import read_json, submit_request, read_config
 from src.utilities.worker_utilities import ResultStatus
 from src.libs.test_base import AvalonBase
 
@@ -29,6 +29,7 @@ logger = logging.getLogger(__name__)
 
 class TestClass():
     test_obj = AvalonBase()
+    config_file = os.path.join(env.worker_input_file, "worker_update.ini")
 
     @pytest.mark.worker
     @pytest.mark.worker_update
@@ -39,18 +40,16 @@ class TestClass():
     @pytest.mark.positive
     def test_worker_update_success(self):
         test_id = '18265'
-        request_file = os.path.join(
-            env.worker_input_file,
-            "worker_update.json")
+        test_data = read_config(self.config_file, test_id)
 
         err_cd = self.test_obj.setup_and_build_request_worker_update(
-            read_json(request_file))
+            test_data)
 
         response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
-            read_json(request_file))
+            test_data)
 
         logger.info("**********Received Response*********\n%s\n", response)
         if env.proxy_mode:
@@ -72,18 +71,16 @@ class TestClass():
     @pytest.mark.positive
     def test_worker_update_unknown_parameter(self):
         test_id = '18266'
-        request_file = os.path.join(
-            env.worker_input_file,
-            "worker_update_unknown_parameter.json")
+        test_data = read_config(self.config_file, test_id)
 
         err_cd = self.test_obj.setup_and_build_request_worker_update(
-            read_json(request_file))
+            test_data)
 
         response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
-            read_json(request_file))
+            test_data)
 
         logger.info("**********Received Response*********\n%s\n", response)
 
@@ -106,18 +103,16 @@ class TestClass():
     @pytest.mark.positive
     def test_worker_update_invalid_parameter(self):
         test_id = '18267'
-        request_file = os.path.join(
-            env.worker_input_file,
-            "worker_update_invalid_parameter.json")
+        test_data = read_config(self.config_file, test_id)
 
         err_cd = self.test_obj.setup_and_build_request_worker_update(
-            read_json(request_file))
+            test_data)
 
         response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
-            read_json(request_file))
+            test_data)
 
         logger.info("**********Received Response*********\n%s\n", response)
 
@@ -140,18 +135,16 @@ class TestClass():
     @pytest.mark.negative
     def test_worker_update_empty_details(self):
         test_id = '18293'
-        request_file = os.path.join(
-            env.worker_input_file,
-            "worker_update_empty_details.json")
+        test_data = read_config(self.config_file, test_id)
 
         err_cd = self.test_obj.setup_and_build_request_worker_update(
-            read_json(request_file))
+            test_data)
 
         response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
-            read_json(request_file))
+            test_data)
 
         logger.info("**********Received Response*********\n%s\n", response)
 

@@ -39,10 +39,6 @@ class TestClass():
         test_id = '18262'
         test_data = read_config(self.config_file, test_id)
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "worker_register.json")
-
         err_cd = self.test_obj.setup_and_build_request_lookup(
             test_data)
 
@@ -66,10 +62,6 @@ class TestClass():
     def test_worker_register_unknown_parameter(self):
         test_id = '18263'
         test_data = read_config(self.config_file, test_id)
-
-        request_file = os.path.join(
-            env.worker_input_file,
-            "worker_register_unknown_parameter.json")
 
         err_cd = self.test_obj.setup_and_build_request_lookup(
             test_data)
@@ -96,10 +88,6 @@ class TestClass():
         test_id = '18881'
         test_data = read_config(self.config_file, test_id)
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_hashingAlgorithm_KECCAK_256.json")
-
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
 
@@ -125,10 +113,6 @@ class TestClass():
         test_id = '18883'
         test_data = read_config(self.config_file, test_id)
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_signingAlgorithm_RSA_OAEP_3072.json")
-
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
 
@@ -153,10 +137,6 @@ class TestClass():
     def test_workerregister_dataEncryptionAlgorithm_list(self):
         test_id = '18886'
         test_data = read_config(self.config_file, test_id)
-
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_dataEncryptionAlgorithm_list.json")
 
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
@@ -184,10 +164,6 @@ class TestClass():
         test_id = '18892'
         test_data = read_config(self.config_file, test_id)
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_orgnizationid_32bytes.json")
-
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
 
@@ -213,10 +189,6 @@ class TestClass():
     def test_workerregister_applicationTypeId_32bytes(self):
         test_id = '18893'
         test_data = read_config(self.config_file, test_id)
-
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_applicationTypeId_32bytes.json")
 
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
@@ -244,10 +216,6 @@ class TestClass():
         test_id = '18894'
         test_data = read_config(self.config_file, test_id)
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_workOrderPayloadFormats_JSON_RPC_JWT.json")
-
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
 
@@ -273,10 +241,6 @@ class TestClass():
     def test_workerregister_workerId_null(self):
         test_id = '18880'
         test_data = read_config(self.config_file, test_id)
-
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_workerId_null.json")
 
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
@@ -304,10 +268,6 @@ class TestClass():
         test_id = '18882'
         test_data = read_config(self.config_file, test_id)
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_hashingAlgorithm_alternate.json")
-
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
 
@@ -333,10 +293,6 @@ class TestClass():
     def test_workerregister_signingAlgorithm_alternate(self):
         test_id = '18884'
         test_data = read_config(self.config_file, test_id)
-
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_signingAlgorithm_alternate.json")
 
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
@@ -364,10 +320,6 @@ class TestClass():
         test_id = '18885'
         test_data = read_config(self.config_file, test_id)
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_keyEncryptionAlgorithm_alternate.json")
-
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
 
@@ -394,10 +346,6 @@ class TestClass():
         test_id = '18887'
         test_data = read_config(self.config_file, test_id)
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_dataEncryptionAlgorithm_alternate.json")
-
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
 
@@ -422,10 +370,6 @@ class TestClass():
     def test_workerregister_workerType_invalid(self):
         test_id = '18888'
         test_data = read_config(self.config_file, test_id)
-
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_workerType_invalid.json")
 
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
@@ -453,10 +397,6 @@ class TestClass():
         test_id = '18889'
         test_data = read_config(self.config_file, test_id)
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_organizationId_empty.json")
-
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
 
@@ -483,10 +423,6 @@ class TestClass():
         test_id = '18890'
         test_data = read_config(self.config_file, test_id)
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_applicationTypeId_empty.json")
-
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
 
@@ -511,10 +447,6 @@ class TestClass():
     def test_workerregister_proofDataType_empty(self):
         test_id = '21238'
         test_data = read_config(self.config_file, test_id)
-
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_proofDataType_empty.json")
 
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
@@ -541,10 +473,6 @@ class TestClass():
         test_id = '20362'
         test_data = read_config(self.config_file, test_id)
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_proofDataType_invalid.json")
-
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
 
@@ -569,10 +497,6 @@ class TestClass():
     def test_workerregister_proofDataType_null(self):
         test_id = '20363'
         test_data = read_config(self.config_file, test_id)
-        
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerregister_proofDataType_null.json")
 
         err_cd = self.test_obj.setup_and_build_request_register(
             test_data)
