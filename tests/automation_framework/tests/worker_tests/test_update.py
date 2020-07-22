@@ -52,7 +52,6 @@ class TestClass():
             env.worker_lookup_output_json_file_name,
             test_data)
 
-        logger.info("**********Received Response*********\n%s\n", response)
         if env.proxy_mode:
             response_code = 0
         else:
@@ -82,8 +81,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         if env.proxy_mode:
             response_code = 0
@@ -115,8 +112,6 @@ class TestClass():
             env.worker_lookup_output_json_file_name,
             test_data)
 
-        logger.info("**********Received Response*********\n%s\n", response)
-
         if env.proxy_mode:
             response_code = 0
         else:
@@ -146,8 +141,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         if env.proxy_mode:
             response_code = 0

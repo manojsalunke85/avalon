@@ -47,7 +47,7 @@ class TestClass():
 
         test_data = read_config(self.create_receipt_config, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_receipt(
+        err_cd = self.test_obj.setup_and_build_request_create_receipt(
             test_data)
 
         receipt_response = submit_request(
@@ -89,7 +89,7 @@ class TestClass():
 
         test_data = read_config(self.create_receipt_config, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_receipt(
+        err_cd = self.test_obj.setup_and_build_request_create_receipt(
             test_data)
 
         receipt_response = submit_request(
@@ -111,7 +111,7 @@ class TestClass():
 
         test_data = read_config(self.create_receipt_config, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_receipt(
+        err_cd = self.test_obj.setup_and_build_request_create_receipt(
             test_data)
 
         receipt_response = submit_request(
@@ -132,7 +132,7 @@ class TestClass():
 
         test_data = read_config(self.create_receipt_config, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_receipt(
+        err_cd = self.test_obj.setup_and_build_request_create_receipt(
             test_data)
 
         receipt_response = submit_request(
@@ -152,7 +152,7 @@ class TestClass():
 
         test_data = read_config(self.receipt_lookup_config, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_receipt(
+        err_cd = self.test_obj.setup_and_build_request_create_receipt(
             test_data)
 
         receipt_response = submit_request(

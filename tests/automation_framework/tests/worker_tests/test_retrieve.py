@@ -46,7 +46,7 @@ class TestClass():
         test_id = '18273'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_retrieve(
+        err_cd = self.test_obj.setup_and_build_request_worker_retrieve(
             test_data)
 
         submit_response = submit_request(
@@ -77,7 +77,8 @@ class TestClass():
             env.worker_input_file,
             "worker_retrieve_empty_params.json")
 
-        err_cd = self.test_obj.setup_and_build_request_retrieve(
+
+        err_cd = self.test_obj.setup_and_build_request_worker_retrieve(
             test_data)
 
         submit_response = submit_request(
@@ -106,7 +107,7 @@ class TestClass():
             env.worker_input_file,
             "workerretrieve_params_unknownparameter.json")
 
-        err_cd = self.test_obj.setup_and_build_request_retrieve(
+        err_cd = self.test_obj.setup_and_build_request_worker_retrieve(
             test_data)
 
         submit_response = submit_request(

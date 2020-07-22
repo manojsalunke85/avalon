@@ -40,7 +40,7 @@ class TestClass():
         test_id = '18262'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_lookup(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -48,8 +48,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response,-32601)
                 is ResultStatus.SUCCESS.value)
@@ -64,7 +62,7 @@ class TestClass():
         test_id = '18263'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_lookup(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -72,8 +70,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response, -32601)
                 is ResultStatus.SUCCESS.value)
@@ -89,7 +85,7 @@ class TestClass():
         test_id = '18881'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -97,8 +93,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response, -32601)
                 is ResultStatus.SUCCESS.value)
@@ -114,7 +108,7 @@ class TestClass():
         test_id = '18883'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -122,8 +116,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response, -32601)
                 is ResultStatus.SUCCESS.value)
@@ -139,7 +131,7 @@ class TestClass():
         test_id = '18886'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -147,8 +139,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response, -32601)
                 is ResultStatus.SUCCESS.value)
@@ -165,16 +155,15 @@ class TestClass():
         test_id = '18892'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
+
 
         response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response, -32601)
                 is ResultStatus.SUCCESS.value)
@@ -191,7 +180,7 @@ class TestClass():
         test_id = '18893'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -199,8 +188,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response,-32601)
                 is ResultStatus.SUCCESS.value)
@@ -217,7 +204,7 @@ class TestClass():
         test_id = '18894'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -225,8 +212,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response, -32601)
                 is ResultStatus.SUCCESS.value)
@@ -243,7 +228,7 @@ class TestClass():
         test_id = '18880'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -251,8 +236,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response, -32601)
                 is ResultStatus.SUCCESS.value)
@@ -269,7 +252,7 @@ class TestClass():
         test_id = '18882'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -277,8 +260,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response, -32601)
                 is ResultStatus.SUCCESS.value)
@@ -295,7 +276,7 @@ class TestClass():
         test_id = '18884'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -303,8 +284,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response,-32601)
                 is ResultStatus.SUCCESS.value)
@@ -321,16 +300,14 @@ class TestClass():
         test_id = '18885'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
-
+  
         response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response,-32601)
                 is ResultStatus.SUCCESS.value)
@@ -347,7 +324,7 @@ class TestClass():
         test_id = '18887'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -355,8 +332,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response,-32601)
                 is ResultStatus.SUCCESS.value)
@@ -372,16 +347,14 @@ class TestClass():
         test_id = '18888'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
-
+  
         response = submit_request(
             self.test_obj.uri_client,
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response,-32601)
                 is ResultStatus.SUCCESS.value)
@@ -398,7 +371,7 @@ class TestClass():
         test_id = '18889'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -406,8 +379,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response,-32601)
                 is ResultStatus.SUCCESS.value)
@@ -424,7 +395,7 @@ class TestClass():
         test_id = '18890'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -432,8 +403,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response, -32601)
                 is ResultStatus.SUCCESS.value)
@@ -449,7 +418,7 @@ class TestClass():
         test_id = '21238'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -457,8 +426,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response,-32601)
                 is ResultStatus.SUCCESS.value)
@@ -474,7 +441,7 @@ class TestClass():
         test_id = '20362'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -482,8 +449,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response,-32601)
                 is ResultStatus.SUCCESS.value)
@@ -499,7 +464,7 @@ class TestClass():
         test_id = '20363'
         test_data = read_config(self.config_file, test_id)
 
-        err_cd = self.test_obj.setup_and_build_request_register(
+        err_cd = self.test_obj.setup_and_build_request_worker_register(
             test_data)
 
         response = submit_request(
@@ -507,8 +472,6 @@ class TestClass():
             self.test_obj.build_request_output['request_obj'],
             env.worker_lookup_output_json_file_name,
             test_data)
-
-        logger.info("**********Received Response*********\n%s\n", response)
 
         assert (validate_response_code(response,-32601)
                 is ResultStatus.SUCCESS.value)
