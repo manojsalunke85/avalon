@@ -85,6 +85,9 @@ def is_valid_params(request_elements, keys_count=None):
 
 
 def verify_work_order_signature(response, worker_obj, requester_nonce):
+    """
+    Function to verify the workorder signature.
+    """
     verify_key = worker_obj['result']['details']['workerTypeData']['verificationKey']
 
     try:
@@ -105,6 +108,9 @@ def verify_work_order_signature(response, worker_obj, requester_nonce):
 
 
 def decrypt_work_order_response(response, session_key, session_iv):
+    """
+    Function to decrypt the workorder responses.
+    """
     decrypted_data = ""
     try:
         decrypted_data = enclave_helper.decrypted_response(response,
@@ -121,6 +127,9 @@ def decrypt_work_order_response(response, session_key, session_iv):
     return err_cd, decrypted_data
 
 def decode_work_order_response(out_data):
+    """
+    Fucntion to decode the workorder responses.
+    """
     decode_data_err = 1
     output = []
     try:
@@ -135,6 +144,9 @@ def decode_work_order_response(out_data):
 
 
 def verify_test(response, expected_res, worker_obj, work_order_obj):
+    """
+    Fucntion is called from the tests to verify if the result is success/failure
+    """
     if type(work_order_obj) != dict:
         session_key = work_order_obj.session_key
         session_iv = work_order_obj.session_iv
@@ -174,6 +186,10 @@ def verify_test(response, expected_res, worker_obj, work_order_obj):
     return ResultStatus.SUCCESS.value
 
 def check_worker_lookup_response(response, operator, value):
+    """
+    Fucntion is called to verify the worker lookup response.
+    returns 0 in case of worker found else returns 1.
+    """
     if env.proxy_mode:
         if operator(response[0], value):
             err_cd = 0
@@ -188,6 +204,10 @@ def check_worker_lookup_response(response, operator, value):
 
 
 def check_worker_retrieve_response(response):
+    """
+    Fucntion is called to verify the worker retrieve response.
+    returns 0 in case of worker retrieved else returns 1.
+    """
     if response["result"]["workerType"] == 1:
         err_cd = 0
     else:
@@ -197,6 +217,9 @@ def check_worker_retrieve_response(response):
 
 
 def check_worker_create_receipt_response(response):
+    """
+    Function is called to verify the worker create receipt response.
+    """
 
     if env.blockchain_type == "ethereum":
         if response[0] == 1:
@@ -213,6 +236,9 @@ def check_worker_create_receipt_response(response):
 
 
 def check_worker_retrieve_receipt_response(response):
+    """
+    Function is called to verify the worker retrieve receipt response.
+    """
     if env.blockchain_type == "ethereum":
         if response[0] == 1:
             err_cd = 0
@@ -228,6 +254,9 @@ def check_worker_retrieve_receipt_response(response):
 
 
 def check_negative_test_responses(response, expected_res):
+    """
+    Fucntion is called for verifying the workorder response of the negative tests.
+    """
     error_msg = response.get("error", {}).get("message")
     if expected_res == "Invalid data format for work order id":
         if error_msg == "Invalid data format for work order id" or\

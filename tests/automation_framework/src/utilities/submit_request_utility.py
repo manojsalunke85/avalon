@@ -34,6 +34,9 @@ def config_file_read():
 
 
 def _create_worker_registry_instance(blockchain_type, config):
+    """
+    This function returns the sdk/proxy implementation class of worker register.
+    """
     # create worker registry instance for direct/proxy model
     if env.proxy_mode and blockchain_type == 'fabric':
         return FabricWorkerRegistryImpl(config)
@@ -45,6 +48,9 @@ def _create_worker_registry_instance(blockchain_type, config):
 
 
 def _create_work_order_instance(blockchain_type, config):
+    """
+    This function returns the sdk/proxy implementation class of worker order.
+    """
     # create work order instance for direct/proxy model
     if env.proxy_mode and blockchain_type == 'fabric':
         return FabricWorkOrderImpl(config)
@@ -56,6 +62,10 @@ def _create_work_order_instance(blockchain_type, config):
 
 
 def _create_work_order_receipt_instance(blockchain_type, config):
+    """
+    This function returns the sdk implementation class for work order receipt.
+    Returns None in case of Proxy mode.
+    """
     # create work order receipt instance for direct/proxy model
     if env.proxy_mode and blockchain_type == 'fabric':
         return None
@@ -69,6 +79,11 @@ def _create_work_order_receipt_instance(blockchain_type, config):
 
 def submit_request_listener(
         uri_client, input_json_str, output_json_file_name):
+    """
+        This function is called from the workorder submit tests.
+        It is used to submit the request directly to listener, when the test mode is
+        set to listener in env.py
+    """
     logger.info("Listener code path\n")
     req_time = time.strftime("%Y%m%d_%H%M%S")
     request_method = input_json_str["method"]
@@ -116,6 +131,10 @@ def submit_request_listener(
 
 
 def workorder_submit_sdk(wo_params, input_json_obj=None):
+    """
+        This function sets up the params file for workorder submit API and
+        calls the respective SDK as per the direct/proxy mode set in env.py
+    """
     logger.info("WorkOrderSubmit SDK code path\n")
     if input_json_obj is None:
         req_id = 3
@@ -149,6 +168,10 @@ def workorder_submit_sdk(wo_params, input_json_obj=None):
 
 
 def worker_lookup_sdk(worker_type, input_json=None):
+    """
+        This function sets up the params file for worker lookup API and
+        calls the respective SDK as per the direct/proxy mode set in env.py
+    """
     logger.info("WorkerLookUp SDK code path\n")
     if input_json is None:
         jrpc_req_id = 3
@@ -180,6 +203,10 @@ def worker_lookup_sdk(worker_type, input_json=None):
 
 
 def worker_register_sdk(register_params, input_json):
+    """
+        This function sets up the params file for worker register API and
+        calls the respective SDK as per the direct/proxy mode set in env.py
+    """
     logger.info("WorkerRegister SDK code path\n")
     jrpc_req_id = input_json["id"]
     if input_json is None:
@@ -211,6 +238,10 @@ def worker_register_sdk(register_params, input_json):
 
 
 def worker_setstatus_sdk(set_status_params, input_json):
+    """
+        This function sets up the params file for set status API and
+        calls the respective SDK as per the direct/proxy mode set in env.py
+    """
     logger.info("WorkerSetStatus SDK code path\n")
     logger.info("Worker status params %s \n", set_status_params)
     if input_json is None:
@@ -239,6 +270,10 @@ def worker_setstatus_sdk(set_status_params, input_json):
 
 
 def worker_retrieve_sdk(worker_id, input_json=None):
+    """
+        This function sets up the params file for worker retrieve API and
+        calls the respective SDK as per the direct/proxy mode set in env.py
+    """
     logger.info("WorkerRetrieve SDK code path\n")
     worker_obj = worker_details.SGXWorkerDetails()
     if input_json is None:
@@ -273,6 +308,10 @@ def worker_retrieve_sdk(worker_id, input_json=None):
 
 
 def worker_update_sdk(update_params, input_json=None):
+    """
+        This function sets up the params file for worker update API and
+        calls the respective SDK as per the direct/proxy mode set in env.py
+    """
     logger.info("WorkerUpdate SDK code path\n")
     logger.info("Worker update params %s \n", update_params)
     worker_obj = worker_details.SGXWorkerDetails()
@@ -299,6 +338,10 @@ def worker_update_sdk(update_params, input_json=None):
 
 
 def workorder_receiptcreate_sdk(wo_create_receipt, input_json):
+    """
+        This function sets up the params file for worker receipt create API and
+        calls the sdk implementation for work_order_receipt_create.
+    """
     logger.info("WorkerReceiptCreate SDK code path\n")
     jrpc_req_id = input_json["id"]
     config = config_file_read()
@@ -324,6 +367,10 @@ def workorder_receiptcreate_sdk(wo_create_receipt, input_json):
     return wo_receipt_resp
 
 def workorder_receiptretrieve_sdk(workorderId, input_json):
+    """
+        This function sets up the params file for worker receipt retrieve API and
+        calls the sdk implementation for work_order_receipt_retrieve.
+    """
     logger.info("ReceiptRetrieve SDK code path\n")
     jrpc_req_id = input_json["id"]
     config = config_file_read()
@@ -352,6 +399,10 @@ def workorder_receiptretrieve_sdk(workorderId, input_json):
     return receipt_update_retrieve
 
 def workorder_getresult_sdk(workorderId, input_json):
+    """
+        This function sets up the params file for workorder getresult API and
+        calls the respective SDK as per the direct/proxy mode set in env.py
+    """
     logger.info("WorkOderGetResult SDK code path\n")
     jrpc_req_id = input_json["id"]
     config = config_file_read()
@@ -369,6 +420,10 @@ def workorder_getresult_sdk(workorderId, input_json):
 
 
 def workorder_receiptlookup_sdk(requesterId, input_json):
+    """
+        This function sets up the params file for worker receipt lookup API and
+        calls the sdk implementation for work_order_receipt_lookup.
+    """
     logger.info("ReceiptRetrieve SDK code path\n")
     jrpc_req_id = input_json["id"]
     config = config_file_read()
