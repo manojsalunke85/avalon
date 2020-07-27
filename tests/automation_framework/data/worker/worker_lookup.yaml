@@ -1,4 +1,5 @@
 Default:
+  jsonrpc: 2.0
   id: 3
   method: WorkerLookUp
   params:
@@ -11,3 +12,10 @@ test_worker_lookup_jsonrpc_different_version:
   jsonrpc: x.0
 test_worker_lookup_workerType_not_unsigned_int:
   workerType: not_uint
+test_worker_lookup_method_field_change:
+  method: remove
+  methodName: WorkerLookUp
+test_worker_lookup_withoutid_params:
+  id: remove
+test_workerlookup_params_unknownparameter:
+  params: '{"unknownEncoding":"unknownEncoding"}'

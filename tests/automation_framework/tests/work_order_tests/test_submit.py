@@ -868,15 +868,11 @@ class TestClass():
     @pytest.mark.listener
     def test_workordersubmit_params_unknownparameter(self):
 
-        request_file = os.path.join(
-            env.work_order_input_file,
-            "workordersubmit_params_unknownparameter.json")
-
-        msg_response = self.test_obj.post_json_msg(request_file)
+        result_response = self.test_obj.run_test(self.config_file, direct_avalon_listener=True)
 
         assert (
             check_negative_test_responses(
-                msg_response,
+                result_response,
                 "Invalid parameter unknownEncoding")
             is ResultStatus.SUCCESS.value)
 
@@ -885,15 +881,11 @@ class TestClass():
     @pytest.mark.listener
     def test_workordersubmit_workerId_notdefaultlength_postmsg(self):
 
-        request_file = os.path.join(
-            env.work_order_input_file,
-            "workordersubmit_workerId_notdefaultlength_postmsg.json")
-
-        msg_response = self.test_obj.post_json_msg(request_file)
+        result_response = self.test_obj.run_test(self.config_file, direct_avalon_listener=True)
 
         assert (
             check_negative_test_responses(
-                msg_response,
+                result_response,
                 "worker "
                 "6ba1f459476bc43b65fd554f6b65910a8f551e4bcb0"
                 "eee6a96dcebaeb14f2ae923456234564567 "
@@ -913,7 +905,7 @@ class TestClass():
                 result_response,
                 "worker "
                 "6ba1f459476bc43b65fd554f6b65910a8f551e4bcb"
-                "0eee6a96dcebaeb14f2ae923456234564567 "
+                "0eee6a96dcebaeb14f2ae923456234564567"
                 "doesn't exists")
             is ResultStatus.SUCCESS.value)
         logger.info('\t\t!!! Test completed !!!\n\n')
@@ -923,15 +915,11 @@ class TestClass():
     @pytest.mark.proxy
     def test_workordersubmit_payloadFormat_notJSONRPC(self):
 
-        request_file = os.path.join(
-            env.work_order_input_file,
-            "workordersubmit_payloadFormat_notJSONRPC.json")
-
-        msg_response = self.test_obj.post_json_msg(request_file)
+        result_response = self.test_obj.run_test(self.config_file, direct_avalon_listener=True)
 
         assert (
             check_negative_test_responses(
-                msg_response,
+                result_response,
                 "Invalid payload format")
             is ResultStatus.SUCCESS.value)
         logger.info('\t\t!!! Test completed !!!\n\n')
@@ -939,15 +927,11 @@ class TestClass():
     @pytest.mark.listener
     def test_workordersubmit_params_empty(self):
 
-        request_file = os.path.join(
-            env.work_order_input_file,
-            "workordersubmit_params_empty.json")
-
-        msg_response = self.test_obj.post_json_msg(request_file)
+        result_response = self.test_obj.run_test(self.config_file, direct_avalon_listener=True)
 
         assert (
             check_negative_test_responses(
-                msg_response,
+                result_response,
                 "Invalid parameter params")
             is ResultStatus.SUCCESS.value)
         logger.info('\t\t!!! Test completed !!!\n\n')
