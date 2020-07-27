@@ -73,18 +73,13 @@ class TestClass():
     @pytest.mark.listener
     def test_worker_lookup_jsonrpc_different_version(self):
         
-
-        request_file = os.path.join(
-            env.worker_input_file,
-            "worker_lookup_jsonrpc_different_version.json")
-
-        response = self.test_obj.post_json_msg(request_file)
+        result_response = self.test_obj.run_test(self.config_file, direct_avalon_listener=True)
 
         logger.info("**********Received Response*********\n%s\n", response)
 
         assert (
             check_negative_test_responses(
-                response,
+                result_response,
                 "Improper Json request Missing or Invalid parameter or value")
             is ResultStatus.SUCCESS.value)
 
@@ -94,17 +89,11 @@ class TestClass():
     def test_worker_lookup_withoutid_params(self):
         
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "worker_lookup_withoutid_params.json")
-
-        response = self.test_obj.post_json_msg(request_file)
-
-        logger.info("**********Received Response*********\n%s\n", response)
+        result_response = self.test_obj.run_test(self.config_file, direct_avalon_listener=True)
 
         assert (
             check_negative_test_responses(
-                response,
+                result_response,
                 "Improper Json request Missing or Invalid parameter or value")
             is ResultStatus.SUCCESS.value)
         logger.info('\t\t!!! Test completed !!!\n\n')
@@ -123,17 +112,11 @@ class TestClass():
     def test_worker_lookup_method_field_change(self):
         
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "worker_lookup_method_field_change.json")
-
-        msg_response = self.test_obj.post_json_msg(request_file)
-
-        logger.info("**********Received Response*********\n%s\n", msg_response)
+        result_response = self.test_obj.run_test(self.config_file, direct_avalon_listener=True)
 
         assert (
             check_negative_test_responses(
-                msg_response,
+                result_response,
                 "Improper Json request Missing or Invalid parameter or value")
             is ResultStatus.SUCCESS.value)
 
@@ -163,17 +146,11 @@ class TestClass():
     def test_workerlookup_params_unknownparameter(self):
         
 
-        request_file = os.path.join(
-            env.worker_input_file,
-            "workerlookup_params_unknownparameter.json")
-
-        msg_response = self.test_obj.post_json_msg(request_file)
-
-        logger.info("**********Received Response*********\n%s\n", msg_response)
+        result_response = self.test_obj.run_test(self.config_file, direct_avalon_listener=True)
 
         assert (
             check_negative_test_responses(
-                msg_response,
+                result_response,
                 "Invalid parameter unknownEncoding")
             is ResultStatus.SUCCESS.value)
 

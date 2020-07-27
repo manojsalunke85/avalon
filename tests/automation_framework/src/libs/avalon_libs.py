@@ -156,7 +156,7 @@ class AvalonImpl():
             receipt_retrieve_obj = WorkOrderReceiptCreate()
 
             create_receipt_config = os.path.join(
-                env.work_order_receipt, "work_order_create_receipt.ini")
+                env.work_order_receipt, "work_order_create_receipt.yaml")
             receipt_request_json = read_config(
                 create_receipt_config, "test_config")
 

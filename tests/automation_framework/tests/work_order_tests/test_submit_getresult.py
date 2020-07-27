@@ -142,17 +142,11 @@ class TestClass():
     @pytest.mark.listener
     def test_workordergetresult_workorderId_empty(self):
 
-        request_file = os.path.join(
-            env.work_order_input_file,
-            "workordergetresult_workorderId_empty.json")
-
-        msg_response = self.test_obj.post_json_msg(request_file)
-
-        logger.info("**********Received Response*********\n%s\n", msg_response)
+        result_response = self.test_obj.run_test(self.config_file, direct_avalon_listener=True)
 
         assert (
             check_negative_test_responses(
-                msg_response,
+                result_response,
                 "Invalid work order Id")
             is ResultStatus.SUCCESS.value)
 

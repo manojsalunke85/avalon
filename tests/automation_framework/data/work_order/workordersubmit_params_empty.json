@@ -1,7 +1,0 @@
-{
-    "jsonrpc": "2.0",
-    "method": "WorkOrderSubmit",
-    "id": 11,
-    "params": {
-    }
-}

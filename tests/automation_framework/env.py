@@ -28,6 +28,13 @@ worker_update_output_json_file_name = "worker_update"
 
 wo_result_output_json_file_name = "work_order_getresult"
 
+wo_create_receipt_output_json_file_name = "work_order_create_receipt"
+
+wo_retrieve_receipt_output_json_file_name = "work_order_retrieve_receipt"
+
+wo_receipt_lookup_output_json_file_name = "work_order_receipt_lookup"
+
+
 blockchain_type = ''
 
 # Direct test mode = listener or client_sdk
