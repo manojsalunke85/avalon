@@ -3,6 +3,7 @@ import logging
 import os
 import src.utilities.worker_utilities as wconfig
 import avalon_crypto_utils.signature as signature
+import env
 logger = logging.getLogger(__name__)
 
 

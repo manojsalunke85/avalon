@@ -18,4 +18,4 @@ test_workordergetresult_workorderid_null:
 test_workordergetresult_workorderid_specialchar:
   workOrderId: \$!@**^(
 test_workordergetresult_workorderid_withoutquotes:
-  workOrderId: '123'
+  workOrderId: 123

@@ -8,6 +8,8 @@ Default:
 test_worker_update_empty_details:
   hashingAlgorithm: remove
 test_worker_update_invalid_parameter:
-  details: '{"hashingAlgori": "KECCAK-256"}'
+  details:
+    hashingAlgori: KECCAK-256
 test_worker_update_unknown_parameter:
-  details: '{"name": "TEST"}'
+  details:
+    name: TEST
