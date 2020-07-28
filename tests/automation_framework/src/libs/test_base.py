@@ -243,15 +243,10 @@ class AvalonBase():
         logger.info('**********Received Response*********\n%s\n', response)
         return response
 
-    def avalon_uncomputed(self, request_file=None, test_data=None):
-        
-        if test_data:
-            json_str=json.dumps(test_data)
-        else:
-            file = open(request_file, "r")
-            json_str = file.read()
-            file.close()
-        logger.info('**********Received Request*********\n%s\n', json_str)
+    def avalon_uncomputed(self, test_data=None):
+                
+        json_str=json.dumps(test_data, indent=4)
+        logger.info('**********Received Request post message*********\n%s\n', json_str)
         response = self.uri_client._postmsg(json_str)
         logger.info('**********Received Response*********\n%s\n', response)
         return response
@@ -332,7 +327,7 @@ class AvalonBase():
         result_response = ""
         submit_response = ""
         if direct_avalon_listener:
-            submit_response = self.avalon_uncomputed(test_data=test_data)
+            submit_response = self.avalon_uncomputed(test_data)
         else:
             submit_response = self.avalon_computed(test_data)
 

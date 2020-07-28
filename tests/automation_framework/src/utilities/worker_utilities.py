@@ -212,12 +212,14 @@ def configure_data(action_obj, input_json, worker_obj, pre_test_response):
 def handle_value(val):
     if val == "NONE":
         output = None
-    elif val in ["-", "null"]:
-        output = val
-    elif isinstance(val, list) or isinstance(val, int):
-        output = val
+    # elif val in ["-", "null"]:
+    #     output = val
+    # elif isinstance(val, list) or isinstance(val, int):
+    #     output = val
+    # else:
+    #     output = yaml.safe_load(val)
     else:
-        output = yaml.safe_load(val)
+        output = val
     return output
 
 
@@ -225,15 +227,15 @@ def config_data_update(input, key, value):
     if key in input.keys():
         if value == "remove":
             del input[key]
-        elif isinstance(yaml.safe_load(value), dict):
-            value = yaml.safe_load(value)
+        elif isinstance(value, dict):
+            #value = yaml.safe_load(value)
             for n_k, n_v in value.items():
                 if isinstance(n_v, dict):
                     config_data_update(input[key], n_k, n_v)
                 else:
-                    input[key][n_k] = handle_value(n_v)
+                    input[key][n_k] = n_v
         else:
-            input[key] = handle_value(value)
+            input[key] = value
         return
     for k, v in input.items():
         if k in ["inData", "outData"]:
@@ -245,7 +247,7 @@ def config_data_update(input, key, value):
 
 def read_config(config_file, test_name):
     yaml_file = open(config_file, "r")
-    parsed_yaml_file = yaml.safe_load(yaml_file)
+    parsed_yaml_file = yaml.load(yaml_file)
     test_config = parsed_yaml_file["Default"]
 
     if parsed_yaml_file.get(test_name):
