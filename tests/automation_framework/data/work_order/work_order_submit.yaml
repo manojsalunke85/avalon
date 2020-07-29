@@ -53,7 +53,7 @@ test_workordersubmit_data_differentdataheartdisease:
     index: 1
     iv: ''
 test_workordersubmit_data_multipleechoresult:
-  '"inData"':
+  inData:
   - data: java
     dataHash: ''
     encryptedDataEncryptionKey: ''
@@ -571,7 +571,7 @@ test_workordersubmit_workerEncryptionKey_special_character:
 test_workordersubmit_workerId_notdefaultlength:
   workerId: 6ba1f459476bc43b65fd554f6b65910a8f551e4bcb0eee6a96dcebaeb14f2ae923456234564567
 test_workordersubmit_workerId_notdefaultlength_postmsg:
-  '"inData"':
+  inData:
   - data: PeTtf5qtUP3iPXEgdDFXcGTlENixzm8Y+2ZkeXlFPPgiFyU4idUjN26hUiSpcJ4rWR8jCzlwSqA0Tr42SI6y2sFkThSY4j4Oe+9rWOkKxm1fW7Gy
     dataHash: d0d71ccef57f2d210a6e6bc58362ed3b7a2b6dd3d38725767bd953277e8e7aad
     encryptedDataEncryptionKey: ''

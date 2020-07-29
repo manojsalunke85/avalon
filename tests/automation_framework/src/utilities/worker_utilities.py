@@ -208,21 +208,6 @@ def configure_data(action_obj, input_json, worker_obj, pre_test_response):
             input_json, worker_obj, pre_test_response)
     return configure_data_output
 
-
-def handle_value(val):
-    if val == "NONE":
-        output = None
-    # elif val in ["-", "null"]:
-    #     output = val
-    # elif isinstance(val, list) or isinstance(val, int):
-    #     output = val
-    # else:
-    #     output = yaml.safe_load(val)
-    else:
-        output = val
-    return output
-
-
 def config_data_update(input, key, value):
     if key in input.keys():
         if value == "remove":
