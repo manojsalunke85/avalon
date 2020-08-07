@@ -6,6 +6,7 @@ import env
 from error_code.error_status import SignatureStatus
 from src.libs.pre_processing_libs import ResultStatus
 import base64
+from conftest import env
 
 logger = logging.getLogger(__name__)
 
@@ -192,7 +193,7 @@ def check_worker_lookup_response(response, operator, value):
     """
     This function will verifies the worker lookup response
     """
-    if env.proxy_mode:
+    if env['proxy_mode']:
         if operator(response[0], value):
             err_cd = 0
         else:
@@ -221,7 +222,7 @@ def check_worker_create_receipt_response(response):
     """
     This function will verifies the create receipt response
     """
-    if env.blockchain_type == "ethereum":
+    if blockchain_type == "ethereum":
         if response[0] == 1:
             err_cd = 0
         else:
@@ -239,7 +240,7 @@ def check_worker_retrieve_receipt_response(response):
     """
     This function will verify the retrieve receipt response
     """
-    if env.blockchain_type == "ethereum":
+    if blockchain_type == "ethereum":
         if response[0] == 1:
             err_cd = 0
         else:
@@ -267,7 +268,7 @@ def check_negative_test_responses(response, expected_res):
     if expected_res == error_msg:
         return ResultStatus.SUCCESS.value
 
-    if (response.get("error", {}).get("code") == -1) and env.proxy_mode:
+    if (response.get("error", {}).get("code") == -1) and env['proxy_mode']:
         return ResultStatus.SUCCESS.value
 
 
@@ -275,7 +276,7 @@ def check_workorder_receipt_lookup_response(response, operator, value):
     """
     This function will verify the receipt lookup response
     """
-    if env.blockchain_type == "fabric":
+    if blockchain_type == "fabric":
         if operator(response[0], value):
             err_cd = 0
         else:

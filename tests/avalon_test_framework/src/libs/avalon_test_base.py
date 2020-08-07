@@ -1,6 +1,7 @@
 import re
 import logging
 import env
+import toml
 from src.libs.pre_processing_libs \
     import read_config, configure_data
 import inspect
@@ -15,6 +16,7 @@ from src.libs.submit_request import \
     worker_setstatus_sdk, workorder_receiptretrieve_sdk, \
     worker_update_sdk, workorder_getresult_sdk, \
     workorder_receiptlookup_sdk
+from conftest import env
 
 avalon_lib_instance = AvalonImpl()
 logger = logging.getLogger(__name__)
@@ -22,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 class AvalonBase():
     def __init__(self):
-        self.uri_client = env.uri_client
+        self.uri_client = env.get("uri_client")
         self.build_request_output = {}
 
     def setup_and_build_request_worker_register(self, input_file):
@@ -327,7 +329,7 @@ class AvalonBase():
         as an output from build_request_obj function.
         """
         request_method = input_file.get("method")
-        if env.test_mode == env.listener_string:
+        if env['test_mode'] == env['listener_string']:
             submit_response = submit_request_listener(
                 uri_client, output_obj)
         else:

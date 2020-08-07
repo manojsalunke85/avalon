@@ -1,0 +1,67 @@
+# Copyright 2019 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+title = "Avalon Automation configuration"
+
+# For proxy_mode, define the blockchain_type to
+# ethereum or fabric
+blockchain_type = ''
+
+# Define the test mode as listener or sdk
+test_mode = "listener"
+
+# Set it to True or False for running with or
+# without blockchain
+proxy_mode = false
+
+##########################################################
+# The section below defines all the constants that are used
+# throughout the test framework.
+##########################################################
+TCFHOME = "/project/avalon"
+
+# Config files path
+tcf_connector_conffile = "/project/avalon/sdk/avalon_sdk/tcf_connector.toml"
+tcs_config_conffiles = "/project/avalon/config/tcs_config.toml"
+confpaths = "."
+
+uri_client_sdk = "http://avalon-listener:1947"
+
+listener_string = "listener"
+
+# Input file path definition for work order tests
+work_order_submit_input_file = "/project/avalon/tests/avalon_test_framework/data/work_order/work_order_submit.yaml"
+
+work_order_getresult_input_file = "/project/avalon/tests/avalon_test_framework/data/work_order/work_order_get_result.yaml"
+
+
+# Input file path definition for worker tests
+worker_lookup_input_file = "/project/avalon/tests/avalon_test_framework/data/worker/worker_lookup.yaml"
+
+worker_retrieve_input_file = "/project/avalon/tests/avalon_test_framework/data/worker/worker_retrieve.yaml"
+
+worker_register_input_file = "/project/avalon/tests/avalon_test_framework/data/worker/worker_register.yaml"
+
+worker_update_input_file = "/project/avalon/tests/avalon_test_framework/data/worker/worker_update.yaml"
+
+worker_setstatus_input_file = "/project/avalon/tests/avalon_test_framework/data/worker/worker_setstatus.yaml"
+
+# Input file path definition for receipt tests
+create_receipt_input_file = "/project/avalon/tests/avalon_test_framework/data/receipt/work_order_create_receipt.yaml"
+
+retrieve_receipt_input_file = "/project/avalon/tests/avalon_test_framework/data/receipt/work_order_retrieve_receipt.yaml"
+
+receipt_lookup_input_file = "/project/avalon/tests/avalon_test_framework/data/receipt/work_order_receipt_lookup.yaml"
+
+ 
