@@ -1,15 +1,14 @@
 import utility.logger as plogger
-import env
 import pytest
 import json
 import os
 import sys
 import logging
 import config.config as pconfig
+from setup import env
 
 logger = logging.getLogger(__name__)
 sys.path.append(os.getcwd())
-
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_config(args=None):
@@ -18,7 +17,7 @@ def setup_config(args=None):
     # parse out the configuration file first
     try:
         config = pconfig.parse_configuration_files(
-            env.tcs_config_conffiles, env.confpaths)
+            [env['tcs_config_conffiles']], [env['confpaths']])
         config_json_str = json.dumps(config, indent=4)
     except pconfig.ConfigurationException as e:
         logger.error(str(e))
