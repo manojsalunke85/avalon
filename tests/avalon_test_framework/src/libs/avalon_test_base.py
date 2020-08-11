@@ -14,11 +14,11 @@ from src.libs.submit_request import \
     worker_setstatus_sdk, workorder_receiptretrieve_sdk, \
     worker_update_sdk, workorder_getresult_sdk, \
     workorder_receiptlookup_sdk
-from setup import env
+from setup import read_configtoml
 
 avalon_lib_instance = AvalonImpl()
 logger = logging.getLogger(__name__)
-
+env = read_configtoml()
 
 class AvalonBase():
     def __init__(self):

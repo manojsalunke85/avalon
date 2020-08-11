@@ -21,9 +21,10 @@ import avalon_crypto_utils.signature as signature
 from avalon_sdk.work_order_receipt.work_order_receipt \
     import WorkOrderReceiptRequest
 from error_code.error_status import ReceiptCreateStatus
-from setup import env
+from setup import read_configtoml
 
 logger = logging.getLogger(__name__)
+env = read_configtoml()
 
 class AvalonRequest():
     def __init__(self):

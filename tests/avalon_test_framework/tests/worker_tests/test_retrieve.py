@@ -22,9 +22,10 @@ from src.libs.pre_processing_libs \
 from src.libs.avalon_test_base import AvalonBase
 from src.libs.pre_processing_libs \
     import read_config
-from setup import env
+from setup import read_configtoml
 
 logger = logging.getLogger(__name__)
+env = read_configtoml()
 
 
 @pytest.mark.usefixtures("setup_teardown")

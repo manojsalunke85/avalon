@@ -25,7 +25,7 @@ from configparser import ConfigParser
 import avalon_crypto_utils.crypto_utility as crypto_utils
 from ecdsa.util import sigencode_der, sigdecode_der
 import copy
-from setup import env
+from setup import read_configtoml
 
 
 """
@@ -45,6 +45,7 @@ class GetResultWaitTime(IntEnum):
 
 
 logger = logging.getLogger(__name__)
+env = read_configtoml()
 
 inputs_params = [
     "workerId",

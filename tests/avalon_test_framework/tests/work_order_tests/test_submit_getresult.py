@@ -6,9 +6,10 @@ from src.libs.verification_libs \
     validate_response_code
 from src.libs.pre_processing_libs \
     import ResultStatus
-from setup import env
+from setup import read_configtoml
 
 logger = logging.getLogger(__name__)
+env = read_configtoml()
 
 
 @pytest.mark.usefixtures("setup_teardown")

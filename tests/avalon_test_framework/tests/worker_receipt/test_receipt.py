@@ -22,9 +22,10 @@ from src.libs.verification_libs \
     check_workorder_receipt_lookup_response
 import operator
 from src.libs.avalon_test_base import AvalonBase
-from setup import env
+from setup import read_configtoml
 
 logger = logging.getLogger(__name__)
+env = read_configtoml()
 
 
 @pytest.mark.usefixtures("setup_teardown")

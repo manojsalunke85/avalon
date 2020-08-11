@@ -20,9 +20,10 @@ from avalon_sdk.connector.blockchains.ethereum.ethereum_worker_registry \
 from avalon_sdk.connector.blockchains.ethereum.ethereum_work_order \
     import EthereumWorkOrderProxyImpl
 import avalon_sdk.worker.worker_details as worker_details
-from setup import env
+from setup import read_configtoml
 
 logger = logging.getLogger(__name__)
+env = read_configtoml()
 
 def config_file_read():
     tcf_connector_conffile = [env['tcf_connector_conffile']]

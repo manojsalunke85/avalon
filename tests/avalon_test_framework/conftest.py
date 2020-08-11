@@ -5,7 +5,7 @@ import os
 import sys
 import logging
 import config.config as pconfig
-from setup import env
+from setup import read_configtoml
 
 logger = logging.getLogger(__name__)
 sys.path.append(os.getcwd())
@@ -14,6 +14,7 @@ sys.path.append(os.getcwd())
 def setup_config(args=None):
     """ Fixture to setup initial config for pytest session. """
 
+    env = read_configtoml()
     # parse out the configuration file first
     try:
         config = pconfig.parse_configuration_files(
