@@ -1,6 +1,5 @@
 import re
 import logging
-import env
 from src.libs.pre_processing_libs \
     import read_config, configure_data
 import inspect
@@ -15,14 +14,15 @@ from src.libs.submit_request import \
     worker_setstatus_sdk, workorder_receiptretrieve_sdk, \
     worker_update_sdk, workorder_getresult_sdk, \
     workorder_receiptlookup_sdk
+from setup import read_configtoml
 
 avalon_lib_instance = AvalonImpl()
 logger = logging.getLogger(__name__)
-
+env = read_configtoml()
 
 class AvalonBase():
     def __init__(self):
-        self.uri_client = env.uri_client
+        self.uri_client = env.get("uri_client")
         self.build_request_output = {}
         self.setup_output = {}
 
@@ -175,7 +175,7 @@ class AvalonBase():
         as an output from build_request_obj function.
         """
         request_method = input_file.get("method")
-        if env.test_mode == env.listener_string:
+        if env['test_mode'] == env['listener_string']:
             submit_response = submit_request_listener(
                 uri_client, output_obj)
         else:
@@ -241,13 +241,13 @@ class AvalonBase():
         """
         if method_name is not None:
             if method_name == "WorkerSetStatus":
-                test_data = read_config(env.worker_setstatus_input_file, "")
+                test_data = read_config(env['worker_setstatus_input_file'], "")
                 reset_status_response = self.reset_worker(test_data, method_name)
                 logger.info("Reset worker status %s \n", reset_status_response)
 
             if method_name == "WorkerSetStatus" or \
                     method_name == "WorkerUpdate":
-                test_data = read_config(env.worker_update_input_file, "")
+                test_data = read_config(env['worker_update_input_file'], "")
                 reset_worker_response = self.reset_worker(test_data, method_name)
                 logger.info("Reset worker %s \n", reset_worker_response)
 

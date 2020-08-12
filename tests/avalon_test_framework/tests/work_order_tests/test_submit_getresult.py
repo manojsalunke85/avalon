@@ -1,14 +1,15 @@
 import pytest
 import logging
-import env
 from src.libs.avalon_test_base import AvalonBase
 from src.libs.verification_libs \
     import verify_test, check_negative_test_responses,\
     validate_response_code
 from src.libs.pre_processing_libs \
     import ResultStatus
+from setup import read_configtoml
 
 logger = logging.getLogger(__name__)
+env = read_configtoml()
 
 
 @pytest.mark.usefixtures("setup_teardown")
@@ -23,7 +24,7 @@ class TestClass():
     def test_workordergetresult_success(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_getresult_input_file)
+            env['work_order_getresult_input_file'])
 
         assert (
             verify_test(
@@ -39,7 +40,7 @@ class TestClass():
     def test_workordergetresult_workorderid_different(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_getresult_input_file)
+            env['work_order_getresult_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -54,7 +55,7 @@ class TestClass():
     def test_workordergetresult_workorderid_specialchar(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_getresult_input_file)
+            env['work_order_getresult_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -69,7 +70,7 @@ class TestClass():
     def test_workordergetresult_workorderid_null(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_getresult_input_file)
+            env['work_order_getresult_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -84,7 +85,7 @@ class TestClass():
     def test_workordergetresult_workorderid_nonhexstring(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_getresult_input_file)
+            env['work_order_getresult_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -100,7 +101,7 @@ class TestClass():
     def test_workordergetresult_workorderid_alphabetsonly(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_getresult_input_file)
+            env['work_order_getresult_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -115,7 +116,7 @@ class TestClass():
     def test_workordergetresult_workorderid_withoutquotes(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_getresult_input_file)
+            env['work_order_getresult_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -130,7 +131,7 @@ class TestClass():
     def test_workordergetresult_emptyparameter(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_getresult_input_file)
+            env['work_order_getresult_input_file'])
 
         assert (validate_response_code(result_response, 2)
                 is ResultStatus.SUCCESS.value)
@@ -142,7 +143,7 @@ class TestClass():
     def test_workordergetresult_unknownparameter(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_getresult_input_file)
+            env['work_order_getresult_input_file'])
 
         assert (validate_response_code(result_response, 2)
                 is ResultStatus.SUCCESS.value)
@@ -153,7 +154,7 @@ class TestClass():
     def test_workordergetresult_workorderId_empty(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_getresult_input_file,
+            env['work_order_getresult_input_file'],
             direct_avalon_listener=True)
 
         assert (

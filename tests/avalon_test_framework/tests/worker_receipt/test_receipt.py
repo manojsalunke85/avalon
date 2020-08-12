@@ -14,7 +14,6 @@
 
 import pytest
 import logging
-import env
 from src.libs.pre_processing_libs \
     import ResultStatus
 from src.libs.verification_libs \
@@ -23,8 +22,10 @@ from src.libs.verification_libs \
     check_workorder_receipt_lookup_response
 import operator
 from src.libs.avalon_test_base import AvalonBase
+from setup import read_configtoml
 
 logger = logging.getLogger(__name__)
+env = read_configtoml()
 
 
 @pytest.mark.usefixtures("setup_teardown")
@@ -37,7 +38,7 @@ class TestClass():
     @pytest.mark.listener
     def test_work_order_create_receipt_success(self):
 
-        result_response = self.test_obj.run_test(env.create_receipt_input_file)
+        result_response = self.test_obj.run_test(env['create_receipt_input_file'])
 
         assert (check_worker_create_receipt_response(result_response)
                 is ResultStatus.SUCCESS.value)
@@ -49,7 +50,7 @@ class TestClass():
         test_obj, "WorkOrderReceiptRetrieve")
     def test_work_order_retrieve_receipt_success(self):
 
-        result_response = self.test_obj.run_test(env.retrieve_receipt_input_file)
+        result_response = self.test_obj.run_test(env['retrieve_receipt_input_file'])
 
         assert (check_worker_retrieve_receipt_response(result_response)
                 is ResultStatus.SUCCESS.value)
@@ -59,7 +60,7 @@ class TestClass():
     @pytest.mark.listener
     def test_create_work_order_receipt_invalid_requester_id(self):
 
-        result_response = self.test_obj.run_test(env.create_receipt_input_file)
+        result_response = self.test_obj.run_test(env['create_receipt_input_file'])
 
         assert (check_worker_create_receipt_response(result_response)
                 is ResultStatus.SUCCESS.value)
@@ -70,7 +71,7 @@ class TestClass():
     def test_create_work_order_receipt_hexstr_workorderRequesthash(
             self):
 
-        result_response = self.test_obj.run_test(env.create_receipt_input_file)
+        result_response = self.test_obj.run_test(env['create_receipt_input_file'])
 
         assert (check_worker_create_receipt_response(result_response)
                 is ResultStatus.SUCCESS.value)
@@ -80,7 +81,7 @@ class TestClass():
     @pytest.mark.listener
     def test_create_work_order_receipt_wrong_rverificationkey(self):
 
-        result_response = self.test_obj.run_test(env.create_receipt_input_file)
+        result_response = self.test_obj.run_test(env['create_receipt_input_file'])
 
         assert (check_worker_create_receipt_response(result_response)
                 is ResultStatus.SUCCESS.value)
@@ -88,11 +89,9 @@ class TestClass():
 
     @pytest.mark.sdk
     @pytest.mark.listener
-    @pytest.mark.setup_teardown_data(
-        test_obj, "WorkOrderReceiptLookUp")
     def test_work_order_receipt_lookup_success(self):
 
-        result_response = self.test_obj.run_test(env.receipt_lookup_input_file)
+        result_response = self.test_obj.run_test(env['receipt_lookup_input_file'])
 
         assert (
             check_workorder_receipt_lookup_response(

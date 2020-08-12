@@ -14,14 +14,15 @@
 
 import pytest
 import logging
-import env
 from src.libs.avalon_test_base import AvalonBase
 from src.libs.verification_libs \
     import verify_test, check_negative_test_responses
 from src.libs.pre_processing_libs \
     import ResultStatus
+from setup import read_configtoml
 
 logger = logging.getLogger(__name__)
+env = read_configtoml()
 
 
 @pytest.mark.usefixtures("setup_teardown")
@@ -36,7 +37,7 @@ class TestClass():
     def test_workordersubmit_success(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -52,7 +53,7 @@ class TestClass():
     def test_workordersubmit_inDataDataEncryptionKey_hyphenecho(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -68,7 +69,7 @@ class TestClass():
     def test_workordersubmit_datahash_null(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -83,7 +84,7 @@ class TestClass():
     def test_workordersubmit_requesterId_null(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -99,7 +100,7 @@ class TestClass():
             self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -116,7 +117,7 @@ class TestClass():
             self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -131,7 +132,7 @@ class TestClass():
     def test_workordersubmit_workloadid_invalid(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -144,7 +145,7 @@ class TestClass():
     def test_workordersubmit_workerEncryptionKey_special_character(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -157,7 +158,7 @@ class TestClass():
     def test_workordersubmit_workerencryptionkey_empty(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -171,7 +172,7 @@ class TestClass():
     def test_workordersubmit_dataencryptionalgorithm_alternate(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -186,7 +187,7 @@ class TestClass():
     def test_workordersubmit_indexindata_50(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -202,7 +203,7 @@ class TestClass():
     def test_workordersubmit_index_orderchange(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -217,7 +218,7 @@ class TestClass():
     def test_workordersubmit_indata_empty(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -231,7 +232,7 @@ class TestClass():
     def test_workordersubmit_indata_remove(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -246,7 +247,7 @@ class TestClass():
     def test_workordersubmit_outdata_empty(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -260,7 +261,7 @@ class TestClass():
     def test_workordersubmit_indata_unknownparametervalue(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -275,7 +276,7 @@ class TestClass():
     def test_workordersubmit_index_negative(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -289,7 +290,7 @@ class TestClass():
     def test_workordersubmit_indatahash_empty(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -304,7 +305,7 @@ class TestClass():
     def test_workordersubmit_datahash_randomstr(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -319,7 +320,7 @@ class TestClass():
     def test_workordersubmit_data_multipleechoresult(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -335,7 +336,7 @@ class TestClass():
     def test_workordersubmit_echoclient(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -351,7 +352,7 @@ class TestClass():
     def test_workordersubmit_indata_alternatetextechoclient(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -367,7 +368,7 @@ class TestClass():
     def test_workordersubmit_indata_specialcharacter(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -382,7 +383,7 @@ class TestClass():
     def test_workordersubmit_iv_specialcharacterechoclient(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -395,7 +396,7 @@ class TestClass():
     def test_workordersubmit_requesterId_paramremove(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -408,7 +409,7 @@ class TestClass():
     def test_workordersubmit_responsetimeout_string(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -421,7 +422,7 @@ class TestClass():
     def test_workordersubmit_dataencryptionalgorithm_list(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -437,7 +438,7 @@ class TestClass():
     def test_workordersubmit_workloadId_twoworkload(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -453,7 +454,7 @@ class TestClass():
     def test_workordersubmit_workorderId_null(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -468,7 +469,7 @@ class TestClass():
     def test_workordersubmit_workerId_nullstring(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -483,7 +484,7 @@ class TestClass():
     def test_workordersubmit_workloadId_specialcharacters(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -498,7 +499,7 @@ class TestClass():
     def test_workordersubmit_encrypteddataencryptionkey_nullechoclient(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -512,7 +513,7 @@ class TestClass():
     def test_workordersubmit_dataencryptionalgorithm_listsamealgotwice(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -526,7 +527,7 @@ class TestClass():
     def test_workordersubmit_encrypteddataencryptionkey_hyphenechoclient(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -542,7 +543,7 @@ class TestClass():
     def test_workordersubmit_encrypteddataencryptionkey_remove(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -558,7 +559,7 @@ class TestClass():
     def test_workordersubmit_outdata_success(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -572,7 +573,7 @@ class TestClass():
     def test_workordersubmit_indata_bothindexremoveDataDatahash(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -585,7 +586,7 @@ class TestClass():
     def test_workordersubmit_indata_oneValidOtherEmptDataDatahash(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -598,7 +599,7 @@ class TestClass():
     def test_workordersubmit_indata_singleindexremoveDataDatahash(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -612,7 +613,7 @@ class TestClass():
     def test_workordersubmit_indata_index2randomstr(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -627,7 +628,7 @@ class TestClass():
     def test_workordersubmit_indata_index1randomstr(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -643,7 +644,7 @@ class TestClass():
     def test_workordersubmit_workloadid_emptystring(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -658,7 +659,7 @@ class TestClass():
     def test_workordersubmit_workloadid_hexstring(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -671,7 +672,7 @@ class TestClass():
     def test_workordersubmit_workload_nullstring(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -686,7 +687,7 @@ class TestClass():
     def test_workordersubmit_workorderid_increasedhexlength(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -701,7 +702,7 @@ class TestClass():
     def test_workordersubmit_workorderidworkloadid_same(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -716,7 +717,7 @@ class TestClass():
     def test_workordersubmit_data_differentdataheartdisease(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -732,7 +733,7 @@ class TestClass():
     def test_workordersubmit_requesterId_specialcharacter(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -747,7 +748,7 @@ class TestClass():
     def test_workordersubmit_requesterNonce_param_empty(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -760,7 +761,7 @@ class TestClass():
     def test_workordersubmit_requestersignature_differentlength(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -776,7 +777,7 @@ class TestClass():
     def test_workordersubmit_indataoutdata_success(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -792,7 +793,7 @@ class TestClass():
     def test_workordersubmit_workorderId_remove(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -805,7 +806,7 @@ class TestClass():
     def test_workordersubmit_sessionkeyiv_allspecial_characters(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -820,7 +821,7 @@ class TestClass():
     def test_workordersubmit_requesterId_differenthexlength(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -833,7 +834,7 @@ class TestClass():
     def test_workordersubmit_workerEncryptionKey_notdefaulthex(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -848,7 +849,7 @@ class TestClass():
     def test_workordersubmit_requesterNonce_notdefaultlength(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -861,7 +862,7 @@ class TestClass():
     def test_workordersubmit_requesterSignature_no(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -875,7 +876,7 @@ class TestClass():
     def test_workordersubmit_encryptedRequestHash_no(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -888,7 +889,7 @@ class TestClass():
     def test_workordersubmit_mandatoryfields_remove(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -901,7 +902,7 @@ class TestClass():
     def test_workordersubmit_id_remove(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -916,7 +917,7 @@ class TestClass():
     def test_workordersubmit_workeridworkloadid_same(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -929,7 +930,7 @@ class TestClass():
     def test_workordersubmit_params_unknownparameter(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file,
+            env['work_order_submit_input_file'],
             direct_avalon_listener=True)
 
         assert (
@@ -944,7 +945,7 @@ class TestClass():
     def test_workordersubmit_workerId_notdefaultlength_postmsg(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file,
+            env['work_order_submit_input_file'],
             direct_avalon_listener=True)
 
         assert (
@@ -963,7 +964,7 @@ class TestClass():
     def test_workordersubmit_workerId_notdefaultlength(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             check_negative_test_responses(
@@ -981,7 +982,7 @@ class TestClass():
     def test_workordersubmit_payloadFormat_notJSONRPC(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file,
+            env['work_order_submit_input_file'],
             direct_avalon_listener=True)
 
         assert (
@@ -995,7 +996,7 @@ class TestClass():
     def test_workordersubmit_params_empty(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file,
+            env['work_order_submit_input_file'],
             direct_avalon_listener=True)
 
         assert (
@@ -1011,7 +1012,7 @@ class TestClass():
     def test_workordersubmit_OutDataDataEncryptionKey_hyphen(self):
 
         result_response = self.test_obj.run_test(
-            env.work_order_submit_input_file)
+            env['work_order_submit_input_file'])
 
         assert (
             verify_test(
@@ -1029,7 +1030,7 @@ class TestClass():
                 match="Data Encryption Algorithm is not String"):
 
             result_response = self.test_obj.run_test(
-                env.work_order_submit_input_file)
+                env['work_order_submit_input_file'])
 
         logger.info('\t\t!!! Test completed !!!\n\n')
 
@@ -1041,7 +1042,7 @@ class TestClass():
                 match="Empty or Invalid dataformat for workerEncryptionKey"):
 
             result_response = self.test_obj.run_test(
-                env.work_order_submit_input_file)
+                env['work_order_submit_input_file'])
 
         logger.info('\t\t!!! Test completed !!!\n\n')
 
@@ -1052,7 +1053,7 @@ class TestClass():
                            match="Encrypting Session key failed: "
                                  "Invalid session key or worker encryption key"):
             result_response = self.test_obj.run_test(
-                env.work_order_submit_input_file)
+                env['work_order_submit_input_file'])
 
         logger.info('\t\t!!! Test completed !!!\n\n')
 
@@ -1065,7 +1066,7 @@ class TestClass():
                 match="Data Encryption Algorithm is not String"):
 
             result_response = self.test_obj.run_test(
-                env.work_order_submit_input_file)
+                env['work_order_submit_input_file'])
 
         logger.info('\t\t!!! Test completed !!!\n\n')
 
@@ -1076,6 +1077,6 @@ class TestClass():
                            match="Worker Encryption Key not valid"):
 
             result_response = self.test_obj.run_test(
-                env.work_order_submit_input_file)
+                env['work_order_submit_input_file'])
 
         logger.info('\t\t!!! Test completed !!!\n\n')

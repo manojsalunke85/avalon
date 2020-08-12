@@ -3,7 +3,6 @@ import json
 import time
 import os
 import config.config as pconfig
-import env
 from avalon_sdk.connector.direct.jrpc.jrpc_worker_registry import \
     JRPCWorkerRegistryImpl
 from avalon_sdk.connector.direct.jrpc.jrpc_work_order import \
@@ -21,23 +20,27 @@ from avalon_sdk.connector.blockchains.ethereum.ethereum_worker_registry \
 from avalon_sdk.connector.blockchains.ethereum.ethereum_work_order \
     import EthereumWorkOrderProxyImpl
 import avalon_sdk.worker.worker_details as worker_details
-logger = logging.getLogger(__name__)
+from setup import read_configtoml
 
+logger = logging.getLogger(__name__)
+env = read_configtoml()
 
 def config_file_read():
+    tcf_connector_conffile = [env['tcf_connector_conffile']]
+    confpaths = [env['confpaths']]
     config = pconfig.parse_configuration_files(
-        env.tcf_connector_conffile, env.confpaths)
-    config["tcf"]["json_rpc_uri"] = env.uri_client_sdk
+        tcf_connector_conffile, confpaths)
+    config["tcf"]["json_rpc_uri"] = env['uri_client_sdk']
     return config
 
 
 def _create_worker_registry_instance(blockchain_type, config):
     """
     This function returns the sdk/proxy implementation class of worker register.
-    """
-    if env.proxy_mode and blockchain_type == 'fabric':
+    """    
+    if env['proxy_mode'] and blockchain_type == 'fabric':
         return FabricWorkerRegistryImpl(config)
-    elif env.proxy_mode and blockchain_type == 'ethereum':
+    elif env['proxy_mode'] and blockchain_type == 'ethereum':
         return EthereumWorkerRegistryImpl(config)
     else:
         return JRPCWorkerRegistryImpl(config)
@@ -46,10 +49,10 @@ def _create_worker_registry_instance(blockchain_type, config):
 def _create_work_order_instance(blockchain_type, config):
     """
     This function returns the sdk/proxy implementation class of worker order.
-    """
-    if env.proxy_mode and blockchain_type == 'fabric':
+    """    
+    if env['proxy_mode'] and blockchain_type == 'fabric':
         return FabricWorkOrderImpl(config)
-    elif env.proxy_mode and blockchain_type == 'ethereum':
+    elif env['proxy_mode'] and blockchain_type == 'ethereum':
         return EthereumWorkOrderProxyImpl(config)
     else:
         return JRPCWorkOrderImpl(config)
@@ -60,9 +63,9 @@ def _create_work_order_receipt_instance(blockchain_type, config):
     This function returns the sdk implementation class for work order receipt.
     Returns None in case of Proxy mode.
     """
-    if env.proxy_mode and blockchain_type == 'fabric':
+    if env['proxy_mode'] and blockchain_type == 'fabric':
         return None
-    elif env.proxy_mode and blockchain_type == 'ethereum':
+    elif env['proxy_mode'] and blockchain_type == 'ethereum':
         # TODO need to implement
         return None
     else:
@@ -119,7 +122,7 @@ def workorder_submit_sdk(wo_params, input_json_obj=None):
     else:
         req_id = input_json_obj["id"]
     config = config_file_read()
-    work_order = _create_work_order_instance(env.blockchain_type, config)
+    work_order = _create_work_order_instance(env['blockchain_type'], config)
 
     logger.info("Work order submit request : %s, \n \n ",
                 wo_params.to_jrpc_string(req_id))
@@ -130,7 +133,7 @@ def workorder_submit_sdk(wo_params, input_json_obj=None):
         wo_params.to_string(),
         id=req_id
     )
-    if env.proxy_mode and (not isinstance(response, dict)):
+    if env['proxy_mode'] and (not isinstance(response, dict)):
         if response.value == 0:
             response = {"error": {"code": 5}}
         else:
@@ -154,8 +157,8 @@ def worker_lookup_sdk(worker_type, input_json=None):
     worker_dict = {'SGX': WorkerType.TEE_SGX,
                    'MPC': WorkerType.MPC, 'ZK': WorkerType.ZK}
     worker_registry = _create_worker_registry_instance(
-        env.blockchain_type, config)
-    if env.blockchain_type == "ethereum":
+        env['blockchain_type'], config)
+    if env['blockchain_type'] == "ethereum":
         if worker_type in worker_dict.keys():
             worker = WorkerType.TEE_SGX
         else:
@@ -194,8 +197,8 @@ def worker_register_sdk(register_params, input_json):
                    'MPC': WorkerType.MPC, 'ZK': WorkerType.ZK}
     config = config_file_read()
     worker_registry = _create_worker_registry_instance(
-        env.blockchain_type, config)
-    if env.proxy_mode and (env.blockchain_type == "ethereum"):
+        env['blockchain_type'], config)
+    if env['proxy_mode'] and (env['blockchain_type'] == "ethereum"):
         worker_register_result = worker_registry.worker_register(
             register_params["worker_id"],
             worker_dict[register_params["workerType"]],
@@ -209,7 +212,7 @@ def worker_register_sdk(register_params, input_json):
             register_params.get("organizationId"),
             register_params.get("applicationTypeId"),
             json.dumps(register_params["details"]), jrpc_req_id)
-    if env.proxy_mode and (not isinstance(worker_register_result, dict)):
+    if env['proxy_mode'] and (not isinstance(worker_register_result, dict)):
         response = worker_register_result.value
         worker_register_result = {"error": {"code": response, "message": ""}}
     logger.info("\n Worker register response: {}\n".format(
@@ -234,8 +237,8 @@ def worker_setstatus_sdk(set_status_params, input_json):
                    4: WorkerStatus.COMPROMISED}
     config = config_file_read()
     worker_registry = _create_worker_registry_instance(
-        env.blockchain_type, config)
-    if env.proxy_mode and (env.blockchain_type == "ethereum"):
+        env['blockchain_type'], config)
+    if env['proxy_mode'] and (env['blockchain_type'] == "ethereum"):
         worker_setstatus_result = worker_registry.worker_set_status(
             set_status_params["worker_id"],
             status_dict[set_status_params["status"]])
@@ -243,7 +246,7 @@ def worker_setstatus_sdk(set_status_params, input_json):
         worker_setstatus_result = worker_registry.worker_set_status(
             set_status_params["worker_id"],
             status_dict[set_status_params["status"]], jrpc_req_id)
-    if env.proxy_mode:
+    if env['proxy_mode']:
         result = worker_setstatus_result
         worker_setstatus_result = {}
         worker_setstatus_result["error"] = {
@@ -267,11 +270,11 @@ def worker_retrieve_sdk(worker_id, input_json=None):
         jrpc_req_id = input_json["id"]
     config = config_file_read()
     worker_registry = _create_worker_registry_instance(
-        env.blockchain_type, config)
+        env['blockchain_type'], config)
     worker_retrieve_result = worker_registry.worker_retrieve(
         worker_id, jrpc_req_id)
 
-    if env.proxy_mode:
+    if env['proxy_mode']:
         if worker_retrieve_result is None:
             worker_retrieve_result = {
                 "error": {
@@ -314,8 +317,8 @@ def worker_update_sdk(update_params, input_json=None):
         jrpc_req_id = input_json["id"]
     config = config_file_read()
     worker_registry = _create_worker_registry_instance(
-        env.blockchain_type, config)
-    if env.proxy_mode and (env.blockchain_type == "ethereum"):
+        env['blockchain_type'], config)
+    if env['proxy_mode'] and (env['blockchain_type'] == "ethereum"):
         worker_update_result = worker_registry.worker_update(
             update_params["worker_id"],
             json.dumps(update_params["details"]))
@@ -323,7 +326,7 @@ def worker_update_sdk(update_params, input_json=None):
         worker_update_result = worker_registry.worker_update(
             update_params["worker_id"],
             json.dumps(update_params["details"]), jrpc_req_id)
-    if env.proxy_mode and (not isinstance(worker_update_result, dict)):
+    if env['proxy_mode'] and (not isinstance(worker_update_result, dict)):
         response = worker_update_result.value
         worker_update_result = {"error": {"code": response, "message": ""}}
     logger.info("\n Worker update response: {}\n".format(worker_update_result))
@@ -341,7 +344,7 @@ def workorder_receiptcreate_sdk(wo_create_receipt, input_json):
     config = config_file_read()
     # Create receipt
     wo_receipt = _create_work_order_receipt_instance(
-        env.blockchain_type, config)
+        env['blockchain_type'], config)
     # Submit work order create receipt jrpc request
     wo_receipt_resp = wo_receipt.work_order_receipt_create(
         wo_create_receipt["workOrderId"],
@@ -373,7 +376,7 @@ def workorder_receiptretrieve_sdk(workorderId, input_json):
     config = config_file_read()
     # Create receipt
     wo_receipt = _create_work_order_receipt_instance(
-        env.blockchain_type, config)
+        env['blockchain_type'], config)
 
     wo_receipt_resp = wo_receipt.work_order_receipt_retrieve(
         workorderId, jrpc_req_id)
@@ -405,7 +408,7 @@ def workorder_getresult_sdk(workorderId, input_json):
     """
     jrpc_req_id = input_json["id"]
     config = config_file_read()
-    work_order = _create_work_order_instance(env.blockchain_type, config)
+    work_order = _create_work_order_instance(env['blockchain_type'], config)
     logger.info("----- Validating WorkOrderGetResult Response ------")
 
     get_result_res = work_order.work_order_get_result(
@@ -414,7 +417,7 @@ def workorder_getresult_sdk(workorderId, input_json):
         "****** WorkOrderGetResult Received Response*****\n%s\n",
         get_result_res)
 
-    if env.proxy_mode and (get_result_res is None):
+    if env['proxy_mode'] and (get_result_res is None):
         get_result_res = {"error": {"code": -1}}
     return get_result_res
 
@@ -429,7 +432,7 @@ def workorder_receiptlookup_sdk(requesterId, input_json):
     config = config_file_read()
 
     wo_receipt = _create_work_order_receipt_instance(
-        env.blockchain_type, config)
+        env['blockchain_type'], config)
 
     wo_receipt_resp = wo_receipt.work_order_receipt_lookup(
         requester_id=requesterId, id=jrpc_req_id)
